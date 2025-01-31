@@ -7,13 +7,16 @@ class TopControls extends Component<{}, TopControlsProps> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      searchTerm: '',
+      searchTerm: localStorage.getItem('searchTerm') || '',
     };
   }
 
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ searchTerm: event.target.value });
-    console.log(this.state.searchTerm);
+  };
+
+  handleSearch = () => {
+    localStorage.setItem('searchTerm', this.state.searchTerm); 
   };
 
   render() {
@@ -28,7 +31,7 @@ class TopControls extends Component<{}, TopControlsProps> {
             value={this.state.searchTerm}
             onChange={this.handleInputChange}
           />
-          <button>Search</button>
+          <button onClick={this.handleSearch}>Search</button>
         </div>
       </div>
     );

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 
 interface TopControlsProps {
+  onSearch: (SearchTerm: string) => void;
   searchTerm: string;
 }
-class TopControls extends Component<{}, TopControlsProps> {
-  constructor(props: {}) {
+
+interface TopControlsState {
+  searchTerm: string;
+}
+class TopControls extends Component<TopControlsState, TopControlsProps> {
+  constructor(props: TopControlsProps) {
     super(props);
     this.state = {
-      searchTerm: localStorage.getItem('searchTerm') || '',
+      searchTerm: props.searchTerm || '',
     };
   }
 
@@ -16,7 +21,7 @@ class TopControls extends Component<{}, TopControlsProps> {
   };
 
   handleSearch = () => {
-    localStorage.setItem('searchTerm', this.state.searchTerm); 
+    this.props.onSearch(this.state.searchTerm.trim());
   };
 
   render() {

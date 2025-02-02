@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
 interface TopControlsProps {
-  onSearch: (SearchTerm: string) => void;
+  onSearch: (searchTerm: string) => void;
   searchTerm: string;
 }
 
 interface TopControlsState {
   searchTerm: string;
 }
-class TopControls extends Component<TopControlsState, TopControlsProps> {
+class TopControls extends Component<TopControlsProps, TopControlsState> {
   constructor(props: TopControlsProps) {
     super(props);
     this.state = {
@@ -23,7 +23,9 @@ class TopControls extends Component<TopControlsState, TopControlsProps> {
   handleSearch = () => {
     this.props.onSearch(this.state.searchTerm.trim());
   };
-
+  triggerError = () => {
+    throw new Error('Error! Something went wrong.');
+  };
   render() {
     return (
       <div>
@@ -37,6 +39,7 @@ class TopControls extends Component<TopControlsState, TopControlsProps> {
             onChange={this.handleInputChange}
           />
           <button onClick={this.handleSearch}>Search</button>
+          <button onClick={this.triggerError}>Trigger Error</button>
         </div>
       </div>
     );

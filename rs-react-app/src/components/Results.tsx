@@ -7,8 +7,6 @@ interface ResultsProps {
 }
 class Results extends Component<ResultsProps> {
   render() {
-    console.log(this.props.loading, this.props.error, this.props.results);
-
     return (
       <div>
         <h2>Results</h2>

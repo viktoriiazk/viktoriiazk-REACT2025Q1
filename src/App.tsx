@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import TopControls from './components/TopControls';
 import Results from './components/Results';
 import './App.css';

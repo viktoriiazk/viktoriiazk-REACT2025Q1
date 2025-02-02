@@ -40,18 +40,33 @@ class App extends Component<object, AppState> {
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) {
+          if (response.status >= 400 && response.status < 500) {
+            if (response.status === 404) {
+              throw new Error(
+                'No Pokémon found with that name. Please check the name and try again.'
+              );
+            } else {
+              throw new Error(
+                'There was an issue with your request. Please try again.'
+              );
+            }
+          }
+          if (response.status >= 500 && response.status < 600) {
+            throw new Error('Server error. Please try again later.');
+          }
           throw new Error(`Error: ${response.status}`);
         }
         return response.json();
       })
       .then((data: { results?: Pokemon[]; name?: string; url?: string }) => {
-        if (data.results) {
+        if (data.results && data.results.length > 0) {
           this.setState({
             results: data.results.map((item: Pokemon) => ({
               name: item.name,
               description: item.url,
             })),
             loading: false,
+            error: null,
           });
         } else {
           this.setState({

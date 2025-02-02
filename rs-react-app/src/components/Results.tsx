@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './Results.module.css';
 
 interface ResultsProps {
   loading: boolean;
@@ -8,10 +9,10 @@ interface ResultsProps {
 class Results extends Component<ResultsProps> {
   render() {
     return (
-      <div>
+      <div className={styles.container}>
         <h2>Results</h2>
         {this.props.loading ? (
-          <div style={styles.spinner}></div>
+          <div className={styles.loader}></div>
         ) : this.props.error ? (
           <p>{this.props.error}</p>
         ) : this.props.results.length > 0 ? (
@@ -30,20 +31,5 @@ class Results extends Component<ResultsProps> {
     );
   }
 }
-const styles: { [key: string]: React.CSSProperties } = {
-  spinner: {
-    border: '4px solid rgba(0, 0, 0, 0.1)',
-    borderLeftColor: '#333',
-    borderRadius: '50%',
-    width: '40px',
-    height: '40px',
-    margin: '20px auto',
-    animation: 'spin 1s linear infinite',
-  },
-  error: {
-    color: 'red',
-    fontWeight: 'bold',
-  },
-};
 
 export default Results;

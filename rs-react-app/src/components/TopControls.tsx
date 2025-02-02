@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import styles from './TopControls.module.css';
 interface TopControlsProps {
   onSearch: (searchTerm: string) => void;
   searchTerm: string;
@@ -31,15 +31,17 @@ class TopControls extends Component<TopControlsProps, TopControlsState> {
       <div>
         <h1>Welcome to the React Components Class Task</h1>
 
-        <div>
+        <div className={styles.controls}>
           <input
             type="text"
             placeholder="Enter search term..."
             value={this.state.searchTerm}
             onChange={this.handleInputChange}
           />
-          <button onClick={this.handleSearch}>Search</button>
-          <button onClick={this.triggerError}>Trigger Error</button>
+          <div className={styles.btns}>
+            <button onClick={this.handleSearch}>Search</button>
+            <button onClick={this.triggerError}>Trigger Error</button>
+          </div>
         </div>
       </div>
     );

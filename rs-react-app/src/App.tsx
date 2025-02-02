@@ -74,7 +74,7 @@ class App extends Component<object, AppState> {
   };
   render() {
     return (
-      <div>
+      <div className="container">
         <TopControls
           onSearch={this.handleSearch}
           searchTerm={this.state.searchTerm}

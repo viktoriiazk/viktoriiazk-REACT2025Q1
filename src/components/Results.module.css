@@ -1,71 +1,74 @@
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px; 
-  }
+  gap: 20px;
+}
 
-  li {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
+li {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  padding: 20px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
 
-  li:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  }
+li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
 
-  li h3 {
-    font-size: 1.5rem;
-    color: #5f4b8b;
-    margin-bottom: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
+li h3 {
+  font-size: 1.5rem;
+  color: #5f4b8b;
+  margin-bottom: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
 
-  li p {
-    font-size: 1rem;
-    color: #555;
-    margin: 0;
-  }
-  li:last-child {
-    margin-bottom: 0;
-  }
+li p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+li:last-child {
+  margin-bottom: 0;
+}
 .loader {
-    display: block;
-    margin: 0 auto;
-    width: 50px;
-    aspect-ratio: 1;
-    display:grid;
-    animation: l26 1s infinite steps(12);
+  display: block;
+  margin: 0 auto;
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  animation: l26 1s infinite steps(12);
+}
+.loader,
+.loader:before,
+.loader:after {
+  background:
+    radial-gradient(closest-side at 50% 12.5%, #f03355 96%, #0000) 50% 0/20% 80%
+      repeat-y,
+    radial-gradient(closest-side at 12.5% 50%, #f03355 96%, #0000) 0 50%/80% 20%
+      repeat-x;
+}
+.loader:before,
+.loader:after {
+  content: '';
+  grid-area: 1/1;
+  transform: rotate(30deg);
+}
+.loader:after {
+  transform: rotate(60deg);
+}
+
+@keyframes l26 {
+  100% {
+    transform: rotate(1turn);
   }
-  .loader,
-  .loader:before,
-  .loader:after{
-    background:
-      radial-gradient(closest-side at 50% 12.5%,
-       #f03355 96%,#0000) 50% 0/20% 80% repeat-y,
-      radial-gradient(closest-side at 12.5% 50%,
-       #f03355 96%,#0000) 0 50%/80% 20% repeat-x;
-  }
-  .loader:before,
-  .loader:after {
-    content: "";
-    grid-area: 1/1;
-    transform: rotate(30deg);
-  }
-  .loader:after {
-    transform: rotate(60deg);
-  }
-  
-  @keyframes l26 {
-    100% {transform:rotate(1turn)}
-  }
+}

@@ -1,0 +1,21 @@
+button {
+    padding: 12px 24px;
+    background-color: #141885;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #3c24d7;
+    transform: translateY(-2px);
+  }
+  .btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }   
+  

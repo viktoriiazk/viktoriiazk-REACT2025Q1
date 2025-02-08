@@ -5,32 +5,9 @@
   text-align: center;
 }
 
-.container {
-  background-color: #e1bffe;
-  padding: 20px;
-  margin: 0 auto;
-  max-width: 1200px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-button {
-  padding: 12px 24px;
-  background-color: #141885;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background-color: #3c24d7;
-  transform: translateY(-2px);
-}
 ul {
   list-style-type: none;
   padding: 0;
   margin: 20px 0;
 }
+

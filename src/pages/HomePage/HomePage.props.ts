@@ -1,7 +1,14 @@
-export type HomePageProps = {
+interface HomePageProps {
   searchTerm: string;
   results: { name: string; description: string }[];
   loading: boolean;
   error: string | null;
-};
-export type Pokemon = { name: string; url: string };
+}
+
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
+export default HomePageProps;
+export type { Pokemon };

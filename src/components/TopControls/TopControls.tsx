@@ -12,7 +12,6 @@ const TopControls: React.FC<TopControlsProps> = ({ onSearch }) => {
   };
   return (
     <div>
-      <h1>Welcome to the React Components Class Task</h1>
       <div className={styles.controls}>
         <Search onSearchTermChange={setSearchTerm} />
         <Button onClick={handleSearchClick} label="Search" />

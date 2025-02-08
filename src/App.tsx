@@ -6,11 +6,8 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/viktoriiazk-REACT2025Q1/" element={<HomePage />} />
-        <Route
-          path="/viktoriiazk-REACT2025Q1/search/:page"
-          element={<HomePage />}
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search/:page" element={<HomePage />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </Router>

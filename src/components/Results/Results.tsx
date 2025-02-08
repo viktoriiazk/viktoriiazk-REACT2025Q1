@@ -1,35 +1,32 @@
-import { Component } from 'react';
+import React from 'react';
 import styles from './Results.module.css';
+import ResultsProps from './Results.props';
+import Card from '../Card/Card';
 
-interface ResultsProps {
-  loading: boolean;
-  error: string | null;
-  results: { name: string; description: string }[];
-}
-class Results extends Component<ResultsProps> {
-  render() {
-    return (
-      <div className={styles.container}>
-        <h2>Results</h2>
-        {this.props.loading ? (
-          <div className={styles.loader}></div>
-        ) : this.props.error ? (
-          <p>{this.props.error}</p>
-        ) : this.props.results.length > 0 ? (
-          <ul>
-            {this.props.results.map((item, index) => (
-              <li key={index}>
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No results found.</p>
-        )}
-      </div>
-    );
-  }
-}
+const Results: React.FC<ResultsProps> = ({
+  results,
+  loading,
+  error,
+  onItemClick,
+}) => {
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return (
+    <div>
+      <h2>Results</h2>
+      <ul className={styles.resultsList}>
+        {results.map((item) => (
+          <Card
+            key={item.name}
+            name={item.name}
+            description={item.description}
+            onClick={() => onItemClick(item.name)} // When the card is clicked
+          />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Results;

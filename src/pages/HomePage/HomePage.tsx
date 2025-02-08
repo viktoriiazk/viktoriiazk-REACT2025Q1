@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Results from '../../components/Results/Results';
 import TopControls from '../../components/TopControls/TopControls.tsx';
 import styles from './HomePage.module.css';
 import { useSearchQuery } from '../../hooks/useSearchQuery.ts';
 import { Pokemon } from './HomePage.props.ts';
+import Pagination from '../../components/Pagination/pagination.tsx';
 
 const HomePage: React.FC = (): JSX.Element => {
-  const [searchTerm, setSearchTerm] = useSearchQuery();
+  const [searchTerm, setSearchTerm, page, setPage] = useSearchQuery();
 
   const [results, setResults] = useState<
     { name: string; description: string }[]
@@ -15,14 +16,16 @@ const HomePage: React.FC = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchData(searchTerm);
-  }, [searchTerm]);
+    fetchData(searchTerm, page);
+  }, [searchTerm, page]);
 
-  const fetchData = (searchTerm: string) => {
+  const fetchData = (searchTerm: string, page: number) => {
     setLoading(true);
     setError(null);
 
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=10';
+    const limit = 10;
+    const offset = (page - 1) * limit;
+    let apiUrl = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
 
     if (searchTerm.trim() !== '') {
       apiUrl = `https://pokeapi.co/api/v2/pokemon/${searchTerm.toLowerCase()}`;
@@ -80,6 +83,7 @@ const HomePage: React.FC = (): JSX.Element => {
     <div className={styles.containerHomePage}>
       <TopControls onSearch={handleSearch} />
       <Results results={results} loading={loading} error={error} />
+      <Pagination page={page} setPage={setPage} />
     </div>
   );
 };

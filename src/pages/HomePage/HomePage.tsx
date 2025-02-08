@@ -1,35 +1,26 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import Results from '../../components/Results/Results';
 import TopControls from '../../components/TopControls/TopControls.tsx';
 import styles from './HomePage.module.css';
-interface Pokemon {
-  name: string;
-  url: string;
-}
+import { Pokemon } from './HomePage.props.ts';
 
-interface AppState {
-  searchTerm: string;
-  results: { name: string; description: string }[];
-  loading: boolean;
-  error: string | null;
-}
-class HomePage extends Component<object, AppState> {
-  constructor(props: object) {
-    super(props);
-    this.state = {
-      searchTerm: localStorage.getItem('searchTerm') || '',
-      results: [],
-      loading: false,
-      error: null,
-    };
-  }
+const HomePage: React.FC = (): JSX.Element => {
+  const [searchTerm, setSearchTerm] = useState<string>(
+    localStorage.getItem('searchTerm') || ''
+  );
+  const [results, setResults] = useState<
+    { name: string; description: string }[]
+  >([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  componentDidMount() {
-    this.fetchData(this.state.searchTerm);
-  }
+  useEffect(() => {
+    fetchData(searchTerm);
+  }, [searchTerm]);
 
-  fetchData = (searchTerm: string) => {
-    this.setState({ loading: true, error: null });
+  const fetchData = (searchTerm: string) => {
+    setLoading(true);
+    setError(null);
 
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=10';
 
@@ -60,48 +51,37 @@ class HomePage extends Component<object, AppState> {
       })
       .then((data: { results?: Pokemon[]; name?: string; url?: string }) => {
         if (data.results && data.results.length > 0) {
-          this.setState({
-            results: data.results.map((item: Pokemon) => ({
+          setResults(
+            data.results.map((item: Pokemon) => ({
               name: item.name,
               description: item.url,
-            })),
-            loading: false,
-            error: null,
-          });
+            }))
+          );
+          setLoading(false);
+          setError(null);
         } else {
-          this.setState({
-            results: [{ name: data.name ?? '', description: data.url ?? '' }],
-            loading: false,
-            error: null,
-          });
+          setResults([{ name: data.name ?? '', description: data.url ?? '' }]);
         }
+        setLoading(false);
+        setError(null);
       })
       .catch((error) => {
-        this.setState({ results: [], loading: false, error: error.message });
+        setResults([]);
+        setLoading(false);
+        setError(error.message);
       });
   };
-  handleSearch = (newSearchTerm: string) => {
+  const handleSearch = (newSearchTerm: string) => {
     const trimmedTerm = newSearchTerm.trim();
     localStorage.setItem('searchTerm', trimmedTerm);
-    this.setState({ searchTerm: trimmedTerm }, () => {
-      this.fetchData(trimmedTerm);
-    });
+    setSearchTerm(trimmedTerm);
   };
-  render() {
-    return (
-      <div className={styles.containerHomePage}>
-        <TopControls
-          onSearch={this.handleSearch}
-          searchTerm={this.state.searchTerm}
-        />
-        <Results
-          results={this.state.results}
-          loading={this.state.loading}
-          error={this.state.error}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.containerHomePage}>
+      <TopControls onSearch={handleSearch} />
+      <Results results={results} loading={loading} error={error} />
+    </div>
+  );
+};
 
 export default HomePage;

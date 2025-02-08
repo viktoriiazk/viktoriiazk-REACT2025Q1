@@ -2,26 +2,23 @@ import React, { useState } from 'react';
 import SearchProps from './Search.props';
 import styles from './Search.module.css';
 
-const Search: React.FC<SearchProps> = ({ initialSearchTerm, onSearch }) => {
-  const [currentSearchTerm, setCurrentSearchTerm] = useState(
-    initialSearchTerm || ''
-  );
+const Search: React.FC<SearchProps> = ({ onSearchTermChange }) => {
+  const [inputValue, setInputValue] = useState<string>('');
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentSearchTerm(event.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    onSearchTermChange(e.target.value);
   };
-  const handleSearch = () => {
-    onSearch(currentSearchTerm.trim());
-  };
+
   return (
-    <div className={styles.searchContainer}>
+    <div>
       <input
+        className={styles.search}
         type="text"
-        placeholder="Enter search term..."
-        value={currentSearchTerm}
+        value={inputValue}
         onChange={handleInputChange}
+        placeholder="Search Pokémon"
       />
-      <button onClick={handleSearch}>Search</button>
     </div>
   );
 };

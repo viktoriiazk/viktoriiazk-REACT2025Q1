@@ -1,5 +1,4 @@
 interface SearchProps {
-  onSearch: (searchTerm: string) => void;
-  initialSearchTerm: string;
+  onSearchTermChange: (SearchTerm: string) => void;
 }
 export default SearchProps;

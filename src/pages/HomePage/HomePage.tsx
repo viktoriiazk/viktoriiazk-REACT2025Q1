@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import Results from '../../components/Results/Results';
 import TopControls from '../../components/TopControls/TopControls.tsx';
 import styles from './HomePage.module.css';
+import { useSearchQuery } from '../../hooks/useSearchQuery.ts';
 import { Pokemon } from './HomePage.props.ts';
 
 const HomePage: React.FC = (): JSX.Element => {
-  const [searchTerm, setSearchTerm] = useState<string>(
-    localStorage.getItem('searchTerm') || ''
-  );
+  const [searchTerm, setSearchTerm] = useSearchQuery();
+
   const [results, setResults] = useState<
     { name: string; description: string }[]
   >([]);

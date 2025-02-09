@@ -12,16 +12,9 @@ const Card: React.FC<CardProps> = ({
   return (
     <li className={styles.card} onClick={onClick}>
       <h3>{name}</h3>
-      <p>
-        <b>Height:</b>
-        {height}
-      </p>
-      <p>
-        <b>Weight:</b> {weight}
-      </p>
-      <p>
-        <b>Base experience:</b> {base_experience}
-      </p>
+      <p>Height: {height}</p>
+      <p>Weight: {weight}</p>
+      <p>Base experience:{base_experience}</p>
     </li>
   );
 };

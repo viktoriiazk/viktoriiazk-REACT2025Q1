@@ -20,11 +20,11 @@ describe('Card Component', () => {
         onClick={vi.fn()}
       />
     );
-
+    screen.debug();
     expect(screen.getByText(/bulbasaur/i)).toBeInTheDocument();
-    expect(screen.getByText(/Height: 7/i)).toBeInTheDocument();
-    expect(screen.getByText(/Weight: 69/i)).toBeInTheDocument();
-    expect(screen.getByText(/Base Experience: 64/i)).toBeInTheDocument();
+    expect(screen.getByText(/Height:\s*7/i)).toBeInTheDocument();
+    expect(screen.getByText(/Weight:\s*69/i)).toBeInTheDocument();
+    expect(screen.getByText(/Base experience:\s*64/i)).toBeInTheDocument();
   });
 
   it('calls onClick when the card is clicked', () => {

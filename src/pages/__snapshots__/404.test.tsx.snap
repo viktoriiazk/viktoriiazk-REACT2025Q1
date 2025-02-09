@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Page404 > matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <h1>
+      404 - Page Not Found
+    </h1>
+  </div>
+</DocumentFragment>
+`;

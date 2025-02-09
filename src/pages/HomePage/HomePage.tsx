@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Results from '../../components/Results/Results';
 import TopControls from '../../components/TopControls/TopControls.tsx';
 import styles from './HomePage.module.css';
 import { useSearchQuery } from '../../hooks/useSearchQuery.ts';
-import { Pokemon } from './HomePage.props.ts';
+import { Pokemon } from '../../components/Card/Card.props.ts';
 import Pagination from '../../components/Pagination/Pagination.tsx';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DetailedCard from '../../components/DetailedCard/DetailedCard';
@@ -19,7 +19,23 @@ const HomePage: React.FC = (): JSX.Element => {
   const [loadingDetails, setLoadingDetails] = useState<boolean>(false);
   const location = useLocation();
   const navigate = useNavigate();
-
+  const fetchItemDetails = useCallback(
+    (itemName: string) => {
+      setLoadingDetails(true);
+      fetch(`https://pokeapi.co/api/v2/pokemon/${itemName}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setSelectedItem(data);
+          setLoadingDetails(false);
+          navigate(`/?frontpage=2&details=1&item=${itemName}`);
+        })
+        .catch((error) => {
+          setLoadingDetails(false);
+          console.error(error);
+        });
+    },
+    [navigate]
+  );
   useEffect(() => {
     fetchData(searchTerm, page);
   }, [searchTerm, page]);
@@ -34,7 +50,7 @@ const HomePage: React.FC = (): JSX.Element => {
     } else {
       setSelectedItem(null);
     }
-  }, [location]);
+  }, [location, fetchItemDetails]);
 
   const fetchData = (searchTerm: string, page: number) => {
     setLoading(true);
@@ -95,20 +111,6 @@ const HomePage: React.FC = (): JSX.Element => {
     const trimmedTerm = newSearchTerm.trim();
     localStorage.setItem('searchTerm', trimmedTerm);
     setSearchTerm(trimmedTerm);
-  };
-  const fetchItemDetails = (itemName: string) => {
-    setLoadingDetails(true);
-    fetch(`https://pokeapi.co/api/v2/pokemon/${itemName}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setSelectedItem(data);
-        setLoadingDetails(false);
-        navigate(`/?frontpage=2&details=1&item=${itemName}`);
-      })
-      .catch((error) => {
-        setLoadingDetails(false);
-        console.error(error);
-      });
   };
 
   const handleItemClick = (itemName: string) => {

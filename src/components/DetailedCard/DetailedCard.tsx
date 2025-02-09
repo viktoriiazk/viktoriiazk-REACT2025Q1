@@ -7,12 +7,13 @@ const DetailedCard: React.FC<DetailedCardProps> = ({
   onClose,
 }) => {
   if (loading) return <div>Loading...</div>;
-
   return (
     <div>
       <button onClick={onClose}>Close</button>
       <h3>{selectedItem.name}</h3>
-      <p>URL: {selectedItem.url}</p>
+      <p>Weight: {selectedItem.weight}</p>
+      <p>Height: {selectedItem.height}</p>
+      <p>Base experience: {selectedItem.base_experience}</p>
     </div>
   );
 };

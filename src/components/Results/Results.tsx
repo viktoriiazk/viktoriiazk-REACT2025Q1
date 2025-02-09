@@ -13,7 +13,7 @@ const Results: React.FC<ResultsProps> = ({
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
+    <div className={styles.resultsComponent}>
       <h2>Results</h2>
       <ul className={styles.resultsList}>
         {results.map((item) => (

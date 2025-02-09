@@ -5,10 +5,4 @@ interface HomePageProps {
   error: string | null;
 }
 
-interface Pokemon {
-  name: string;
-  url: string;
-}
-
 export default HomePageProps;
-export type { Pokemon };

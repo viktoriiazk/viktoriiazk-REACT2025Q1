@@ -1,0 +1,33 @@
+li {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    max-width: 285px;
+  }
+
+  li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  li h3 {
+    font-size: 1.5rem;
+    color: #5f4b8b;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  li p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+  }
+  li:last-child {
+    margin-bottom: 0;
+  }

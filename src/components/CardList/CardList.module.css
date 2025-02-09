@@ -1,44 +1,15 @@
 
-  ul {
+  .resultsList {
     list-style: none;
     padding: 0;
     margin: 0;
     display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px; 
   }
-
-  li {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-
-  li:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  li h3 {
-    font-size: 1.5rem;
-    color: #5f4b8b;
-    margin-bottom: 10px;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-
-  li p {
-    font-size: 1rem;
-    color: #555;
-    margin: 0;
-  }
-  li:last-child {
-    margin-bottom: 0;
-  }
+.resultsComponent{
+  width: 100%;
+}
 .loader {
     display: block;
     margin: 0 auto;

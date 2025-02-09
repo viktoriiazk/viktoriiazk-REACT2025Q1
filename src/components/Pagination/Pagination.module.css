@@ -1,0 +1,19 @@
+.paginationWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.paginationBtn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0 15px;
+  transition: all 0.3s ease;
+}
+.paginationPage {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './Results.module.css';
-import ResultsProps from './Results.props';
+import styles from './CardList.module.css';
+import CardListProps from './CardList.props';
 import Card from '../Card/Card';
 
-const Results: React.FC<ResultsProps> = ({
+const CardList: React.FC<CardListProps> = ({
   results,
   loading,
   error,
@@ -11,6 +11,7 @@ const Results: React.FC<ResultsProps> = ({
 }) => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+  if (results.length === 0) return <div>No results found</div>;
 
   return (
     <div className={styles.resultsComponent}>
@@ -23,7 +24,7 @@ const Results: React.FC<ResultsProps> = ({
             height={item.height}
             weight={item.weight}
             base_experience={item.base_experience}
-            onClick={() => onItemClick(item.name)} // When the card is clicked
+            onClick={() => onItemClick(item.name)}
           />
         ))}
       </ul>
@@ -31,4 +32,4 @@ const Results: React.FC<ResultsProps> = ({
   );
 };
 
-export default Results;
+export default CardList;

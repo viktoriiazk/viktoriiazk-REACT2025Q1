@@ -1,4 +1,4 @@
-interface ResultsProps {
+interface CardListProps {
   results: {
     name: string;
     height: number;
@@ -9,4 +9,4 @@ interface ResultsProps {
   error: string | null;
   onItemClick: (itemName: string) => void;
 }
-export default ResultsProps;
+export default CardListProps;

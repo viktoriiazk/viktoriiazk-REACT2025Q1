@@ -1,6 +1,6 @@
 import { Pokemon } from '../Card/Card.props';
 interface DetailedCardProps {
-  selectedItem: Pokemon;
+  selectedItem?: Pokemon;
   loading: boolean;
   onClose: () => void;
 }

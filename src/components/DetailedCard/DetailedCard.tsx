@@ -7,6 +7,7 @@ const DetailedCard: React.FC<DetailedCardProps> = ({
   onClose,
 }) => {
   if (loading) return <div>Loading...</div>;
+  if (!selectedItem) return <div>No item selected</div>;
   return (
     <div>
       <button onClick={onClose}>Close</button>

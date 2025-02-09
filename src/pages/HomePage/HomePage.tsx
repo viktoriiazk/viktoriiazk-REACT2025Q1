@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Results from '../../components/Results/Results';
+import CardList from '../../components/CardList/CardList.tsx';
 import TopControls from '../../components/TopControls/TopControls.tsx';
 import styles from './HomePage.module.css';
 import { useSearchQuery } from '../../hooks/useSearchQuery.ts';
@@ -142,7 +142,7 @@ const HomePage: React.FC = (): JSX.Element => {
 
       <div className={styles.resultsWrapper}>
         <div className={styles.leftSection}>
-          <Results
+          <CardList
             results={results}
             loading={loading}
             error={error}

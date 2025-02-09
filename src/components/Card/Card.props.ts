@@ -1,6 +1,8 @@
 interface CardProps {
   name: string;
-  description: string;
+  height: number;
+  weight: number;
+  base_experience: number;
   onClick: () => void;
 }
 interface Pokemon {

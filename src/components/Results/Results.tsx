@@ -20,7 +20,9 @@ const Results: React.FC<ResultsProps> = ({
           <Card
             key={item.name}
             name={item.name}
-            description={item.description}
+            height={item.height}
+            weight={item.weight}
+            base_experience={item.base_experience}
             onClick={() => onItemClick(item.name)} // When the card is clicked
           />
         ))}

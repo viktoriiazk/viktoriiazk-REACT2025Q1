@@ -11,7 +11,7 @@ import DetailedCard from '../../components/DetailedCard/DetailedCard';
 const HomePage: React.FC = (): JSX.Element => {
   const [searchTerm, setSearchTerm, page, setPage] = useSearchQuery();
   const [results, setResults] = useState<
-    { name: string; description: string }[]
+    { name: string; height: number; weight: number; base_experience: number }[]
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -87,16 +87,31 @@ const HomePage: React.FC = (): JSX.Element => {
       })
       .then((data: { results?: Pokemon[]; name?: string; url?: string }) => {
         if (data.results && data.results.length > 0) {
-          setResults(
-            data.results.map((item: Pokemon) => ({
-              name: item.name,
-              description: item.url,
-            }))
+          const fetchDetailsPromises = data.results.map((item: Pokemon) =>
+            fetch(item.url)
+              .then((response) => response.json())
+              .then((details) => ({
+                name: item.name,
+                height: details.height,
+                weight: details.weight,
+                base_experience: details.base_experience,
+              }))
           );
-          setLoading(false);
-          setError(null);
+          Promise.all(fetchDetailsPromises)
+            .then((detailedResults) => {
+              setResults(detailedResults);
+              setLoading(false);
+              setError(null);
+            })
+            .catch((error) => {
+              setResults([]);
+              setLoading(false);
+              setError(error.message);
+            });
         } else {
-          setResults([{ name: data.name ?? '', description: data.url ?? '' }]);
+          setResults([
+            { name: data.name ?? '', height: 0, weight: 0, base_experience: 0 },
+          ]);
         }
         setLoading(false);
         setError(null);
